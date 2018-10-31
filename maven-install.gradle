@@ -1,7 +1,13 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
+def getVersionName(version) {
+    isRelease = project.hasProperty('release')
+    return isRelease ? version : "${version}-SNAPSHOT"
+}
+
 group = GROUP
-version = VERSION_NAME
+version = getVersionName(VERSION_NAME)
+
 
 
 install {
