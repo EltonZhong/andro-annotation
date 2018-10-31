@@ -1,0 +1,47 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = GROUP
+version = VERSION_NAME
+
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom.project {
+            name 'Glip Screen Annotation'
+            artifactId ARTIFACT_ID
+            packaging 'jar'
+            description 'The Prebuit Glip Screen Annotation'
+
+
+            developers {
+                developer {
+                    id 'ringcentral'
+                    name 'RingCentral'
+                    email 'tony.lin@ringcentral.com'
+                }
+            }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: RELEASE_REPOSITORY_URL) {
+            }
+
+            snapshotRepository(url: SNAPSHOT_REPOSITORY_URL) {
+            }
+        }
+    }
+    doLast {
+        println "**************************************************************************************************************"
+        println "Glip Screen Annotation Uploaded"
+        println "Group           : " + GROUP
+        println "ArtifactId      : " + ARTIFACT_ID
+        println "Version         : " + VERSION_NAME
+        println "Repository      : " + (VERSION_NAME.contains("SNAPSHOT") ? SNAPSHOT_REPOSITORY_URL : RELEASE_REPOSITORY_URL)
+        println "**************************************************************************************************************"
+    }
+}
